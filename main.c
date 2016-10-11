@@ -5,13 +5,13 @@
 #include <stdio.h>
 //#include <conio.h>
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-
-    if (argc != 1)
+    printf("Quantidade de parametros de entrada: %d\n", argc);
+    if (argc != 2)
     {
-       printf("Deve ser passado o nome do arquivo de entrada como parametro de execução. Apenas o nome do arquivo de entrada.\n");
-       return;
+       printf("Deve ser passado o nome do arquivo de entrada como parametro de execucao. Apenas o nome do arquivo de entrada.\n");
+       return 0;
     }
 
     FILE *arquivoDeEntrada;
@@ -21,11 +21,11 @@ void main(int argc, char *argv[])
     int i;
     //clrscr();
 
-    arquivoDeEntrada = fopen(*argv, "rt");
+    arquivoDeEntrada = fopen(argv[1], "rt");
     if (arquivoDeEntrada == NULL)
     {
         printf("Problemas na abertura do arquivo\n");
-        return;
+        return 0;
     }
 
     i = 1;
@@ -38,5 +38,6 @@ void main(int argc, char *argv[])
         i++;
     }
     fclose(arquivoDeEntrada);
+    return 1;
 }
 
