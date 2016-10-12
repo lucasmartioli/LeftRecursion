@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     GramaticalRule* s = readgramar(argv[1]);
     if (!s)
     {
-        printf("Problemas na intrerpretacao da gramatica.");
+        printf("Problemas na leitura da gramatica. Verifique o formato de entrada!");
         return 0;
     }
 
