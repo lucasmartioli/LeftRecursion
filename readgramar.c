@@ -21,8 +21,14 @@ GramaticalRule* readgramar(char *filename)
     GramaticalRule *gRule = s;
     while (!feof(arquivoDeEntrada))
     {
-        gRule->key = (char)fgetc(arquivoDeEntrada);
+        int key = fgetc(arquivoDeEntrada);
+
+        if(!isupper(key))
+            break;
+
+        gRule->key = (char)key;
         gRule->rule = (char*) malloc(500);
+        strcpy(gRule->rule, "");
 
         int sep = fgetc(arquivoDeEntrada);
         if (sep != '-')
@@ -34,6 +40,10 @@ GramaticalRule* readgramar(char *filename)
             memcpy(&gRule->rule[ruleLength], &c, 1);
             ruleLength++;
         };
+
+        memcpy(&gRule->rule[ruleLength], "", 1);
+
+        //strcat(gRule->rule, "");
 
         if(c == EOF)
             break;
