@@ -18,6 +18,7 @@
 
     //int openfile(char *filename, FILE *arquivoDeEntrada);
     GramaticalRule* readgramar(char *filename);
+    int readRule(FILE *arquivoDeEntrada, GramaticalRule* gRule);
 
 
 #endif //PREDICTIONTABLE_READGRAMAR_H
