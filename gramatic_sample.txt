@@ -28,5 +28,14 @@ novaRegra.next = NULL;
 gramatica.next = *novaRegra;
 
 
+struct AlgorithmsResult 
+{
+	struct AlgorithmsResult *next;
+	char *first;
+	char *follow;
+	char key;
+}
+
+
 
 
