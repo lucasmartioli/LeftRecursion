@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
 project(PredictionTable)
 
-set(SOURCE_FILES main.c)
+set(SOURCE_FILES main.c readgramar.c)
 add_executable(PredictionTable ${SOURCE_FILES})

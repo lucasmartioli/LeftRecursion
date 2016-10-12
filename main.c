@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include "readgramar.h"
 //#include <conio.h>
 
 int main(int argc, char *argv[])
@@ -14,30 +15,20 @@ int main(int argc, char *argv[])
        return 0;
     }
 
-    FILE *arquivoDeEntrada;
-    int tamanhoMinimoDaLinha = 100;
-    char Linha[tamanhoMinimoDaLinha];
-    char *result;
-    int i;
-    //clrscr();
-
-    arquivoDeEntrada = fopen(argv[1], "rt");
-    if (arquivoDeEntrada == NULL)
+    GramaticalRule* s = readgramar(argv[1]);
+    if (!s)
     {
-        printf("Problemas na abertura do arquivo\n");
+        printf("Problemas na intrerpretacao da gramatica.");
         return 0;
     }
 
-    i = 1;
-    while (!feof(arquivoDeEntrada))
+    GramaticalRule* atual = s;
+    while (atual != NULL)
     {
-        // Lê uma linha (inclusive com o '\n')
-        result = fgets(Linha, tamanhoMinimoDaLinha, arquivoDeEntrada);
-        if (result)  // Se foi possível ler
-            printf("Linha %d : %s",i,Linha);
-        i++;
+        printf("Key: %c Regra: %s \n", atual->key, atual->rule);
+        atual = atual->next;
     }
-    fclose(arquivoDeEntrada);
+
     return 1;
 }
 
