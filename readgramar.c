@@ -22,20 +22,16 @@ GramaticalRule* readgramar(char *filename)
     while (!feof(arquivoDeEntrada))
     {
         gRule->key = (char)fgetc(arquivoDeEntrada);
+        gRule->rule = (char*) malloc(500);
+
         int sep = fgetc(arquivoDeEntrada);
         if (sep != '-')
             return NULL;
 
-        char rule[500] = {""};
-        //strcpy(rule, "");
-
-        gRule->rule = rule;
-
         int ruleLength = 0;
-
         int c;
         while (!feof(arquivoDeEntrada) && (c = fgetc(arquivoDeEntrada)) != '|' && c != '\n' && c != EOF && ruleLength < 499) {
-            memcpy(&rule[ruleLength], &c, 1);
+            memcpy(&gRule->rule[ruleLength], &c, 1);
             ruleLength++;
         };
 
