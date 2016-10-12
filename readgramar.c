@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <malloc.h>
+#include <stdbool.h>
 #include "readgramar.h"
 
 #define TAMANHO_MAXIMO_DA_REGRA 500
@@ -24,73 +25,70 @@ GramaticalRule* readgramar(char *filename)
     if (!readRule(arquivoDeEntrada, s))
         return NULL;
 
-    GramaticalRule *currentrule = s;
-    GramaticalRule *nextgrule;
+    GramaticalRule *currentgrammarrule = s;
+    GramaticalRule *nextgrammarrule;
     while (!feof(arquivoDeEntrada))
     {
-        nextgrule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
-        nextgrule->next = NULL;
+        nextgrammarrule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
+        nextgrammarrule->next = NULL;
 
-        if (!readRule(arquivoDeEntrada, nextgrule))
+        if (!readRule(arquivoDeEntrada, nextgrammarrule))
             break;
 
-        while (currentrule->next != NULL)
-            currentrule = currentrule->next;
+        while (currentgrammarrule->next != NULL)
+            currentgrammarrule = currentgrammarrule->next;
 
-        currentrule->next = nextgrule;
-        currentrule = nextgrule;
+        currentgrammarrule->next = nextgrammarrule;
+        currentgrammarrule = nextgrammarrule;
     }
 
     fclose(arquivoDeEntrada);
     return s;
 }
 
-int readRule(FILE *arquivoDeEntrada, GramaticalRule  *gRule) {
+int readRule(FILE *arquivoDeEntrada, GramaticalRule  *gramarrule) {
 
 
-    int c;
+    int currentchar;
     int key = fgetc(arquivoDeEntrada);
 
     if (!isupper(key))
         return 0;
 
-    gRule->key = (char)key;
-    gRule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
-    strcpy(gRule->rule, "");
+    gramarrule->key = (char)key;
+    gramarrule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
+    strcpy(gramarrule->rule, "");
 
-    int sep = fgetc(arquivoDeEntrada);
-    if (sep != '-')
+    int separator = fgetc(arquivoDeEntrada);
+    if (separator != '-')
         return 0;
 
-    int completerule = 0;
-    while (!completerule) {
+    while (true) {
         int ruleLength = 0;
-        while (!feof(arquivoDeEntrada) && (c = fgetc(arquivoDeEntrada)) != '|' && c != '\n' && c != EOF &&
+        while (!feof(arquivoDeEntrada) && (currentchar = fgetc(arquivoDeEntrada)) != '|' && currentchar != '\n' && currentchar != EOF &&
                ruleLength < TAMANHO_MAXIMO_DA_REGRA - 1) {
-            memcpy(&gRule->rule[ruleLength], &c, 1);
+            memcpy(&gramarrule->rule[ruleLength], &currentchar, 1);
             ruleLength++;
         };
 
         if (ruleLength >= TAMANHO_MAXIMO_DA_REGRA - 1)
             return 0;
 
-        memcpy(&gRule->rule[ruleLength], "", 1);
+        memcpy(&gramarrule->rule[ruleLength], "", 1);
 
-        if (c == '|') {
-            GramaticalRule *nextgRule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
-            nextgRule->key = gRule->key;
-            nextgRule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
-            strcpy(nextgRule->rule, "");
-            nextgRule->next = NULL;
-            gRule->next = nextgRule;
-            gRule = nextgRule;
+        if (currentchar == '|') {
+            GramaticalRule *nextgrammarrule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
+            nextgrammarrule->key = gramarrule->key;
+            nextgrammarrule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
+            strcpy(nextgrammarrule->rule, "");
+            nextgrammarrule->next = NULL;
+            gramarrule->next = nextgrammarrule;
+            gramarrule = nextgrammarrule;
             continue;
         }
 
-        completerule = 1;
+        break;
     };
-
-    //(*initial) = gRule;
 
     return 1;
 }
