@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include "readgramar.h"
+#include "follow.h"
+
 //#include <conio.h>
 
 int main(int argc, char *argv[])
