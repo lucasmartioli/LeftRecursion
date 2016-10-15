@@ -42,6 +42,7 @@ FirstSet *first(GramaticalRule *gramaticalrule)
                     }
 
 
+
                 }
             }
 
@@ -66,3 +67,30 @@ FirstSet *seekkey(FirstSet *firstset, char key)
 
     return NULL;
 }
+
+int containemptyinrule(char *rule)
+{
+    for (int i = 0; i < strlen(rule); i++) {
+        if(rule[i] == CARACTER_VAZIO)
+            return 1;
+    }
+
+    return 0;
+}
+
+void copyrulewithoutempty(char *rulesource, char *ruledestination)
+{
+    int j= 0;
+    for (int i = 0; i < strlen(rulesource); i++) {
+        if(rulesource[i] == CARACTER_VAZIO)
+            continue;
+
+        ruledestination[j] = rulesource[i];
+        j++;
+    }
+
+    ruledestination[j] = '\0';
+
+    return;
+}
+

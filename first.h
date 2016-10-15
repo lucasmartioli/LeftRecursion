@@ -18,5 +18,7 @@
 
     FirstSet *first(GramaticalRule *gramaticalrule);
     FirstSet *seekkey(FirstSet *firstset);
+    int containemptyinrule(char *rule);
+    void copyrulewithoutempty(char *rulesource, char *ruledestination)
 
 #endif //PREDICTIONTABLE_FIRST_H
