@@ -7,7 +7,7 @@
 
     #include <stdio.h>
 
-    #define CARACTER_VAZIO 'ε'
+    #define CARACTER_VAZIO ' '
 
     struct gramaticalrule
     {

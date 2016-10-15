@@ -42,9 +42,9 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     currentfirstset->set[ length + 1] = crule;
                     currentfirstset->set[length + 2] = '\0';
                     mudou = true;
-                } else if (notterminalset = seekkey(head,crule) != NULL) {
+                } else if ((notterminalset = seekkey(head,crule)) != NULL) {
                     char *newfirst = (char *) malloc(500);
-                    copyrulewithoutempty(notterminalset, newfirst);
+                    copysetwithoutempty(notterminalset->set, newfirst);
 
 
 
@@ -97,18 +97,18 @@ int containinset(char *rule, char c)
     return 0;
 }
 
-void copyrulewithoutempty(char *rulesource, char *ruledestination)
+void copysetwithoutempty(char *setsource, char *setdestination)
 {
     int j= 0;
-    for (int i = 0; i < strlen(rulesource); i++) {
-        if(rulesource[i] == CARACTER_VAZIO)
+    for (int i = 0; i < strlen(setsource); i++) {
+        if(setsource[i] == CARACTER_VAZIO)
             continue;
 
-        ruledestination[j] = rulesource[i];
+        setdestination[j] = setsource[i];
         j++;
     }
 
-    ruledestination[j] = '\0';
+    setdestination[j] = '\0';
 
     return;
 }
@@ -129,7 +129,7 @@ void copyrule(char *rulesource, char *ruledestination)
 void unionset(char *setsource1, char *setsource2)
 {
     char *newset2 = (char*) malloc(500);
-    copyrulewithoutempty(setsource2, newset2);
+    copysetwithoutempty(setsource2, newset2);
 
     int endindexsetsource1 = strlen(setsource1);
     for (int i = 0; i < strlen(newset2); i++) {

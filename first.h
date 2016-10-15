@@ -18,7 +18,7 @@
 
     FirstSet *first(GramaticalRule *headgramaticalrule);
     int containinset(char *rule, char c);
-    void copyrulewithoutempty(char *rulesource, char *ruledestination);
+    void copysetwithoutempty(char *setsource, char *setdestination);
     void copyrule(char *rulesource, char *ruledestination);
     void unionset(char *setsource1, char *setsource2);
     FirstSet *seekkey(FirstSet *firstset, char key);
