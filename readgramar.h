@@ -19,7 +19,6 @@
 
     typedef struct gramaticalrule GramaticalRule;
 
-    //int openfile(char *filename, FILE *arquivoDeEntrada);
     GramaticalRule* readgramar(char *filename);
     int readRule(FILE *arquivoDeEntrada, GramaticalRule* gramarrule);
 
