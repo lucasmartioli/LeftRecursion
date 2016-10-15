@@ -1,7 +1,7 @@
 # PredictionTable
 Gera a tabela preditiva para um parser preditivo, dado uma gramática
 
-struct GramaticalRule
+struct **GramaticalRule**
 {
   struct GramaticalRule *next;
   char *rule;
@@ -11,7 +11,7 @@ struct GramaticalRule
 S-aSb
 S-ab
 
-struct GramaticalRule gramatica;
+struct **GramaticalRule** gramatica;
 
 char *rule1 = "aSb" ;
 
@@ -19,7 +19,7 @@ gramatica.key = 'S';
 gramatica.rule = rule1;
 gramatica.next = NULL;
 
-struct GramaticalRule novaRegra;
+struct **GramaticalRule** novaRegra;
 
 char *rule2 = "ab" ;
 
@@ -30,7 +30,7 @@ novaRegra.next = NULL;
 gramatica.next = *novaRegra;
 
 
-struct AlgorithmsResult
+struct **AlgorithmsResult**
 {
 	struct AlgorithmsResult *next;
 	char *first;
