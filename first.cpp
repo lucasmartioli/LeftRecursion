@@ -7,7 +7,7 @@
 FirstSet *first(GramaticalRule *gramaticalrule)
 {
     FirstSet *head = (FirstSet*) malloc(sizeof(FirstSet));
-    int mudou = 0;
+    int mudou = false;
 
     do
     {
@@ -29,6 +29,7 @@ FirstSet *first(GramaticalRule *gramaticalrule)
                 if (islower(crule))
                 {
                     strncat(currentfirstset->set, crule, 1);
+                    mudou = true;
                 } else {
 
 
