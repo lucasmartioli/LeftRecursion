@@ -7,9 +7,16 @@
 FirstSet *first(GramaticalRule *gramaticalrule)
 {
     int mudou = 0;
-    while (mudou)
+    do
     {
+        GramaticalRule currentrule = gramaticalrule;
+        while (currentrule != NULL)
+        {
 
-    }
+            currentrule = currentrule.next;
+        }
+
+
+    } while (mudou);
 
 }
