@@ -7,7 +7,7 @@
 
 FirstSet *first(GramaticalRule *gramaticalrule)
 {
-    FirstSet *head = (FirstSet*) malloc(sizeof(FirstSet));
+    FirstSet *head = NULL;
     int mudou = false;
 
     //CARACTER_VAZIO esta definido em readgramar.h
@@ -24,6 +24,8 @@ FirstSet *first(GramaticalRule *gramaticalrule)
                 currentfirstset = (FirstSet*) malloc(sizeof(FirstSet));
                 currentfirstset->key = key;
                 currentfirstset->set = (char*) malloc(500);
+                if (head == NULL)
+                    head = currentfirstset;
             }
 
             for (int i = 0; i < strlen(currentrule->rule); i++)
