@@ -29,6 +29,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                 currentfirstset = (FirstSet*) malloc(sizeof(FirstSet));
                 currentfirstset->key = key;
                 currentfirstset->set = (char*) malloc(500);
+                strcpy(currentfirstset->set, "");
                 if (head == NULL)
                     head = currentfirstset;
             }
@@ -41,10 +42,13 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                 if (islower(crule))
                 {
                     int length = strlen(currentfirstset->set);
-                    currentfirstset->set[ length + 1] = crule;
-                    currentfirstset->set[length + 2] = '\0';
+                    currentfirstset->set[length] = crule;
+                    currentfirstset->set[length + 1] = '\0';
+              //      printf(crule);
+                    printf(currentfirstset->set);
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
                     char *newfirst = (char *) malloc(500);
+                    strcpy(newfirst, "");
                     copysetwithoutempty(notterminalset->set, newfirst);
                     unionset(currentfirstset->set, newfirst);
 
@@ -56,8 +60,8 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     if (todostemvazio)
                     {
                         int length = strlen(currentfirstset->set);
-                        currentfirstset->set[length + 1] = CARACTER_VAZIO;
-                        currentfirstset->set[length + 2] = '\0';
+                        currentfirstset->set[length] = CARACTER_VAZIO;
+                        currentfirstset->set[length + 1] = '\0';
                     }
 
                 }
@@ -65,8 +69,8 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                 if (containinset(currentrule->rule, CARACTER_VAZIO))
                 {
                     int length = strlen(currentfirstset->set);
-                    currentfirstset->set[length + 1] = CARACTER_VAZIO;
-                    currentfirstset->set[length + 2] = '\0';
+                    currentfirstset->set[length] = CARACTER_VAZIO;
+                    currentfirstset->set[length + 1] = '\0';
                 }
             }
 
@@ -138,6 +142,7 @@ void copyset(char *setsource, char *setdestination)
 void unionset(char *setsource1, char *setsource2)
 {
     char *newset2 = (char*) malloc(500);
+    strcpy(newset2, "");
     copysetwithoutempty(setsource2, newset2);
 
     int endindexsetsource1 = strlen(setsource1);

@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "readgramar.h"
-#include "follow.h"
+#include "first.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +28,14 @@ int main(int argc, char *argv[])
         printf("Key: %c Regra: %s \n", atual->key, atual->rule);
         atual = atual->next;
     }
+
+    FirstSet * f = first(s);
+    while (f != NULL)
+    {
+        printf("Key: %c Set: %s", f->key, f->set);
+        f = f->next;
+    }
+
 
     return 1;
 }
