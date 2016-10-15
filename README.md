@@ -15,7 +15,8 @@ S-ab
 
 struct **GramaticalRule** gramatica;
 
-char *rule1 = "aSb" ;
+char *rule1 = "aSb";
+
 
 gramatica.key = 'S';
 gramatica.rule = rule1;
