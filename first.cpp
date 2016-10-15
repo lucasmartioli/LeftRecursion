@@ -34,6 +34,12 @@ FirstSet *first(GramaticalRule *gramaticalrule)
                     strncat(currentfirstset->set, crule, 1);
                     mudou = true;
                 } else {
+                    if(crule != CARACTER_VAZIO){      //verifica se é o caracter vazio
+                        char crule = currentfirstset->key;  //se não for, entao o crule é first
+                    }
+                    for (int j = 0; j < strlen(currentrule->rule); j++) {  //verifica para o resto das regras se alguma tem vazio inclusive na primeira key
+                            
+                    }
 
 
                 }
