@@ -27,7 +27,13 @@ FirstSet *first(GramaticalRule *gramaticalrule)
             {
                 char crule = currentrule->rule[i];
                 if (islower(crule))
-                    addfirst();
+                {
+                    strncat(currentfirstset->set, crule, 1);
+                } else {
+
+
+                }
+
 
             }
 
