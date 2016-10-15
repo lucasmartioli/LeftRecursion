@@ -4,10 +4,10 @@ Gera a tabela preditiva para um parser preditivo, dado uma gramática
 struct **GramaticalRule**
 {
 
-  struct GramaticalRule *next;
-  char *rule;
-  char key;
-  
+    struct GramaticalRule *next;
+    char *rule;
+    char key;
+      
 }
 
 S-aSb
@@ -35,9 +35,9 @@ gramatica.next = *novaRegra;
 struct **AlgorithmsResult**
 {
 
-	struct AlgorithmsResult *next;
-	char *first;
-	char *follow;
-	char key;
+    struct AlgorithmsResult *next;
+    char *first;
+    char *follow;
+    char key;
 	
 }
