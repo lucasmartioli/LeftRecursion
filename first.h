@@ -16,9 +16,11 @@
 
     typedef struct firstset FirstSet;
 
-    FirstSet *first(GramaticalRule *gramaticalrule);
-    FirstSet *seekkey(FirstSet *firstset);
-    int containemptyinrule(char *rule);
-    void copyrulewithoutempty(char *rulesource, char *ruledestination)
+    FirstSet *first(GramaticalRule *headgramaticalrule);
+    int containinset(char *rule, char c);
+    void copyrulewithoutempty(char *rulesource, char *ruledestination);
+    void copyrule(char *rulesource, char *ruledestination);
+    void unionset(char *setsource1, char *setsource2);
+    FirstSet *seekkey(FirstSet *firstset, char key);
 
 #endif //PREDICTIONTABLE_FIRST_H
