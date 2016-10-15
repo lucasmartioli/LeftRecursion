@@ -4,4 +4,12 @@
 
 #include "first.h"
 
+FirstSet *first(GramaticalRule *gramaticalrule)
+{
+    int mudou = 0;
+    while (mudou)
+    {
 
+    }
+
+}
