@@ -6,8 +6,6 @@
 #include "readgramar.h"
 #include "follow.h"
 
-//#include <conio.h>
-
 int main(int argc, char *argv[])
 {
     printf("Quantidade de parametros de entrada: %d\n", argc);
