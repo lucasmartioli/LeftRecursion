@@ -1,0 +1,8 @@
+//
+// Created by Lucas on 10/15/2016.
+//
+
+#ifndef PREDICTIONTABLE_FIRST_H
+#define PREDICTIONTABLE_FIRST_H
+
+#endif //PREDICTIONTABLE_FIRST_H
