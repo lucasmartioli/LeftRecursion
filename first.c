@@ -57,9 +57,18 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
 
                     int i = 0;
                     int todostemvazio;
-                    while ( i < strlen(currentrule->rule) && isupper(currentrule->rule[i]) && (notterminalset = seekkey(head,crule)) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
-                    {i++;} //Nao precisa de nada aqui dentro mesmo
-                    todostemvazio = (i+1) == strlen(currentrule->rule);
+                    while ( i < (strlen(currentrule->rule) - 1) && isupper(currentrule->rule[i]) && (notterminalset = seekkey(head,currentrule->rule[i])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
+                    {
+                        if ((notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL)
+                        {
+                            char *newfirst = (char *) malloc(500);
+                            strcpy(newfirst, "");
+                            copysetwithoutempty(notterminalset->set, newfirst);
+                            unionset(currentfirstset->set,newfirst);
+                        }
+                        i++;
+                    } //Nao precisa de nada aqui dentro mesmo
+                    todostemvazio = i == strlen(currentrule->rule) && (notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO);
                     if (todostemvazio)
                         unionset(currentfirstset->set, "*");
 
@@ -71,10 +80,10 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
 
             }
 
+
             if (!mudou)
-            {
                 mudou = beforelength != strlen(currentfirstset->set);
-            }
+
 
 
             currentrule = currentrule->next;
