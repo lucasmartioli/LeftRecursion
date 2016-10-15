@@ -71,12 +71,9 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
 
             }
 
-            int t;
             if (!mudou)
             {
-                t = strlen(currentfirstset->set);
-                if  (beforelength != t)
-                    mudou = true;
+                mudou = beforelength != strlen(currentfirstset->set);
             }
 
 
@@ -146,16 +143,13 @@ void copyset(char *setsource, char *setdestination)
 
 void unionset(char *setsource1, char *setsource2)
 {
-    char *newset2 = (char*) malloc(500);
-    strcpy(newset2, "");
-    copysetwithoutempty(setsource2, newset2);
 
     int endindexsetsource1 = strlen(setsource1);
-    for (int i = 0; i < strlen(newset2); i++) {
-        if(containinset(setsource1, newset2[i]))
+    for (int i = 0; i < strlen(setsource2); i++) {
+        if(containinset(setsource1, setsource2[i]))
             continue;
 
-        setsource1[endindexsetsource1] = newset2[i];
+        setsource1[endindexsetsource1] = setsource2[i];
         setsource1[endindexsetsource1+1] = '\0';
         endindexsetsource1++;
     }
