@@ -16,6 +16,7 @@
 
     typedef struct firstset FirstSet;
 
-    FirstSet *first(GramaticalRule *gramaticalrule)
+    FirstSet *first(GramaticalRule *gramaticalrule);
+    FirstSet *seekkey(FirstSet *firstset);
 
 #endif //PREDICTIONTABLE_FIRST_H
