@@ -32,10 +32,10 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     head = currentfirstset;
             }
 
-            for (int i = 0; i < strlen(currentrule->rule); i++)
+            if (strlen(currentrule->rule) >= 1)
             {
                 FirstSet *notterminalset;
-                char crule = currentrule->rule[i];
+                char crule = currentrule->rule[1];
                 if (islower(crule))
                 {
                     int length = strlen(currentfirstset->set);
@@ -43,7 +43,10 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     currentfirstset->set[length + 2] = '\0';
                     mudou = true;
                 } else if (notterminalset = seekkey(head,crule) != NULL) {
-                    char *newfirst = (char*) malloc(500);
+                    char *newfirst = (char *) malloc(500);
+                    copyrulewithoutempty(notterminalset, newfirst);
+
+
 
 
 
