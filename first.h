@@ -22,5 +22,6 @@
     void copyset(char *setsource, char *setdestination);
     void unionset(char *setsource1, char *setsource2);
     FirstSet *seekkey(FirstSet *firstset, char key);
+    void queuingpointer(FirstSet *head, FirstSet *current);
 
 #endif //PREDICTIONTABLE_FIRST_H

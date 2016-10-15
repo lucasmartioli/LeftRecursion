@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     FirstSet * f = first(s);
     while (f != NULL)
     {
-        printf("Key: %c Set: %s", f->key, f->set);
+        printf("Key: %c Set: %s\n", f->key, f->set);
         f = f->next;
     }
 

@@ -30,8 +30,11 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                 currentfirstset->key = key;
                 currentfirstset->set = (char*) malloc(500);
                 strcpy(currentfirstset->set, "");
+                currentfirstset->next = NULL;
                 if (head == NULL)
                     head = currentfirstset;
+                else
+                    queuingpointer(head, currentfirstset);
             }
 
             int beforelength = strlen(currentrule->rule);
@@ -44,8 +47,6 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     int length = strlen(currentfirstset->set);
                     currentfirstset->set[length] = crule;
                     currentfirstset->set[length + 1] = '\0';
-              //      printf(crule);
-                    printf(currentfirstset->set);
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
                     char *newfirst = (char *) malloc(500);
                     strcpy(newfirst, "");
@@ -157,6 +158,20 @@ void unionset(char *setsource1, char *setsource2)
     setsource1[endindexsetsource1] = '\0';
 
     return;
+}
+
+void queuingpointer(FirstSet *head, FirstSet *current)
+{
+
+    if (head == NULL)
+        return;
+
+    FirstSet *p = head;
+    while (p->next != NULL)
+        p = p->next;
+
+    p->next = current;
+
 }
 
 
