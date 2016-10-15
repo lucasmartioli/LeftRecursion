@@ -15,6 +15,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
     int mudou = false;
 
     //CARACTER_VAZIO esta definido em readgramar.h
+    //CARACTER_FINAL_ARQUIVO
 
     do
     {
@@ -32,6 +33,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     head = currentfirstset;
             }
 
+            int beforelength = strlen(currentrule->rule);
             if (strlen(currentrule->rule) >= 1)
             {
                 FirstSet *notterminalset;
@@ -41,27 +43,35 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     int length = strlen(currentfirstset->set);
                     currentfirstset->set[ length + 1] = crule;
                     currentfirstset->set[length + 2] = '\0';
-                    mudou = true;
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
                     char *newfirst = (char *) malloc(500);
                     copysetwithoutempty(notterminalset->set, newfirst);
                     unionset(currentfirstset->set, newfirst);
 
-                    //int i = 1;
-                    //while ( i < strlen(currentrule->rule) && )
-
-
-//                    if(crule != CARACTER_VAZIO){      //verifica se é o caracter vazio
-//                        char crule = currentfirstset->key;  //se não for, entao o crule é first
-//                    }
-//                    for (int j = 0; j < strlen(currentrule->rule); j++) {  //verifica para o resto das regras se alguma tem vazio inclusive na primeira key
-//
-//                    }
-
-
+                    int i = 0;
+                    int todostemvazio;
+                    while ( i < strlen(currentrule->rule) && isupper(currentrule->rule[i]) && (notterminalset = seekkey(head,crule)) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
+                    {} //Nao precisa de nada aqui dentro mesmo
+                    todostemvazio = (i+1) == strlen(currentrule->rule);
+                    if (todostemvazio)
+                    {
+                        int length = strlen(currentfirstset->set);
+                        currentfirstset->set[length + 1] = CARACTER_VAZIO;
+                        currentfirstset->set[length + 2] = '\0';
+                    }
 
                 }
+
+                if (containinset(currentrule->rule, CARACTER_VAZIO))
+                {
+                    int length = strlen(currentfirstset->set);
+                    currentfirstset->set[length + 1] = CARACTER_VAZIO;
+                    currentfirstset->set[length + 2] = '\0';
+                }
             }
+
+            if (!mudou)
+                mudou = beforelength != strlen(currentrule->rule);
 
             currentrule = currentrule->next;
         }

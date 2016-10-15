@@ -8,6 +8,7 @@
     #include <stdio.h>
 
     #define CARACTER_VAZIO ' '
+    #define CARACTER_FINAL_ARQUIVO '$'
 
     struct gramaticalrule
     {
