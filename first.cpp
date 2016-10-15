@@ -54,6 +54,8 @@ FirstSet *first(GramaticalRule *gramaticalrule)
 
     } while (mudou);
 
+    return head;
+
 }
 
 FirstSet *seekkey(FirstSet *firstset, char key)
