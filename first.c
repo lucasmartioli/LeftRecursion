@@ -35,7 +35,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
             if (strlen(currentrule->rule) >= 1)
             {
                 FirstSet *notterminalset;
-                char crule = currentrule->rule[1];
+                char crule = currentrule->rule[0];
                 if (islower(crule))
                 {
                     int length = strlen(currentfirstset->set);
@@ -45,12 +45,11 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
                     char *newfirst = (char *) malloc(500);
                     copysetwithoutempty(notterminalset->set, newfirst);
+                    unionset(currentfirstset->set, newfirst);
 
+                    //int i = 1;
+                    //while ( i < strlen(currentrule->rule) && )
 
-
-
-
-//                    unionset();
 
 //                    if(crule != CARACTER_VAZIO){      //verifica se é o caracter vazio
 //                        char crule = currentfirstset->key;  //se não for, entao o crule é first
@@ -113,14 +112,14 @@ void copysetwithoutempty(char *setsource, char *setdestination)
     return;
 }
 
-void copyrule(char *rulesource, char *ruledestination)
+void copyset(char *setsource, char *setdestination)
 {
     int i;
-    for (i = 0; i < strlen(rulesource); i++) {
-        ruledestination[i] = rulesource[i];
+    for (i = 0; i < strlen(setsource); i++) {
+        setdestination[i] = setsource[i];
     }
 
-    ruledestination[i] = '\0';
+    setdestination[i] = '\0';
 
     return;
 }
