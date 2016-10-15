@@ -5,7 +5,9 @@
 #ifndef PREDICTIONTABLE_READGRAMAR_H
 #define PREDICTIONTABLE_READGRAMAR_H
 
-#include <stdio.h>
+    #include <stdio.h>
+
+    #define CARACTER_VAZIO 'ε'
 
     struct gramaticalrule
     {

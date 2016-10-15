@@ -3,11 +3,14 @@
 //
 
 #include "first.h"
+#include "readgramar.h"
 
 FirstSet *first(GramaticalRule *gramaticalrule)
 {
     FirstSet *head = (FirstSet*) malloc(sizeof(FirstSet));
     int mudou = false;
+
+    //CARACTER_VAZIO esta definido em readgramar.h
 
     do
     {
@@ -34,8 +37,6 @@ FirstSet *first(GramaticalRule *gramaticalrule)
 
 
                 }
-
-
             }
 
             currentrule = currentrule->next;
