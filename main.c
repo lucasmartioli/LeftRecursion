@@ -38,7 +38,13 @@ int main(int argc, char *argv[])
     if (!writefirstset(f))
         return 0;
 
-    follow(s, f);
+    FollowSet *followset = follow(s, f);
+    FollowSet *ff = followset;
+    while (ff != NULL)
+    {
+        printf("Key: %c Set: %s\n", ff->key, ff->set);
+        ff = ff->next;
+    }
 
     return 1;
 }
