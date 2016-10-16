@@ -34,10 +34,10 @@ struct GramaticalRule
 S-aSb
 S-ab
 
+```
 struct **GramaticalRule** gramatica;
 
 char *rule1 = "aSb";
-
 
 gramatica.key = 'S';
 gramatica.rule = rule1;
@@ -63,3 +63,7 @@ struct **AlgorithmsResult**
     char key;
 	
 }
+```
+
+
+
