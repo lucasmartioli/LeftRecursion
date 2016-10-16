@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     if (!writefirstset(f))
         return 0;
 
+    follow(s, f);
 
     return 1;
 }
@@ -71,6 +72,8 @@ int writefirstset(FirstSet *firstset)
         }
         firstset = firstset->next;
     }
+
+
 
     fclose(firstfile);
     return 1;
