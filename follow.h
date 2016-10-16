@@ -6,7 +6,7 @@
 #define PREDICTIONTABLE_FOLLOW_H
 
 #include "conjunto.h"
-#include "readgramar.h"
+#include "readgrammar.h"
 
 struct followset
 {
@@ -17,6 +17,7 @@ struct followset
 
 typedef struct followset FollowSet;
 
-Conjunto *follow(GramaticalRule *gramaticalRules);
+
+Conjunto* follow(GrammarRule* gramaticalRules);
 
 #endif //PREDICTIONTABLE_FOLLOW_H

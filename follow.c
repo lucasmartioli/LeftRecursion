@@ -4,7 +4,7 @@
 
 #include <malloc.h>
 #include <string.h>
-#include "readgramar.h"
+#include "readgrammar.h"
 #include "conjunto.h"
 #include "follow.h"
 #include <regex.h>
@@ -28,8 +28,8 @@ int isTerminal(char producao){
     return !(regexec(&regex, str, maxGroup, groupArray, 0));
 }
 
-FollowSet *criaConjuntosFollow(GramaticalRule *gramaticalRules){
-    GramaticalRule* atual = gramaticalRules;
+FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules){
+    GrammarRule* atual = gramaticalRules;
     if(atual != NULL){
         f = (FollowSet*) malloc(sizeof(FollowSet));
         f->key = atual->key;
@@ -58,21 +58,21 @@ char getFirst(char simbolo){
 }
 
 
-Conjunto *follow(GramaticalRule *gramaticalRules) {
+Conjunto *follow(GrammarRule *gramaticalRules) {
 
     criaConjuntosFollow(gramaticalRules);
 
     int mudou = 0;
-    GramaticalRule *atual = gramaticalRules;
-    while(atual != NULL){
-        char* rule = atual->rule;
+    GrammarRule *atual = gramaticalRules;
+    while(atual != NULL) {
+        char *rule = atual->rule;
         int qtdeSimbolos = sizeof(rule);
         for (int i = 0; i < qtdeSimbolos; ++i) {
             char simbolo = rule[i];
-            if(!isTerminal(simbolo)){
-                char proximo = rule[i+1];
-                if(proximo != '\0'){
-                    if(isTerminal(proximo))
+            if (!isTerminal(simbolo)) {
+                char proximo = rule[i + 1];
+                if (proximo != '\0') {
+                    if (isTerminal(proximo))
                         addFollow(simbolo, proximo);
                     else
                         addFollow(simbolo, getFirst(proximo));

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#include "readgramar.h"
+#include "readgrammar.h"
 #include "first.h"
 #include "follow.h"
 
@@ -20,14 +20,14 @@ int main(int argc, char *argv[])
        return 0;
     }
 
-    GramaticalRule* s = readgramar(argv[1]);
+    GrammarRule* s = readgrammar(argv[1]);
     if (!s)
     {
         printf("Problemas na leitura da gramatica. Verifique o formato de entrada!");
         return 0;
     }
 
-    GramaticalRule* atual = s;
+    GrammarRule* atual = s;
     while (atual != NULL)
     {
         printf("Key: %c Regra: %s \n", atual->key, atual->rule);
@@ -38,8 +38,6 @@ int main(int argc, char *argv[])
     if (!writefirstset(f))
         return 0;
 
-    atual = s;
-    follow(atual);
 
     return 1;
 }

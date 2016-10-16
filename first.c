@@ -7,20 +7,20 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include "first.h"
-#include "readgramar.h"
+#include "grammar.h"
 
-FirstSet *first(GramaticalRule *headgramaticalrule)
+FirstSet *first(GrammarRule *headgramaticalrule)
 {
     FirstSet *head = NULL;
 
 
-    //CARACTER_VAZIO esta definido em readgramar.h
+    //CARACTER_VAZIO esta definido em readgrammar.h
     //CARACTER_FINAL_ARQUIVO
     int mudou;
     do
     {
         mudou = false;
-        GramaticalRule *currentrule = headgramaticalrule;
+        GrammarRule *currentrule = headgramaticalrule;
         while (currentrule != NULL)
         {
             char key = currentrule->key;
@@ -29,7 +29,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
             {
                 currentfirstset = (FirstSet*) malloc(sizeof(FirstSet));
                 currentfirstset->key = key;
-                currentfirstset->set = (char*) malloc(500);
+                currentfirstset->set = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
                 strcpy(currentfirstset->set, "");
                 currentfirstset->next = NULL;
                 if (head == NULL)
@@ -50,29 +50,26 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     setcrule[1] = '\0';
                     unionset(currentfirstset->set, setcrule);
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
-                    char *newfirst = (char *) malloc(500);
+                    char *newfirst = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
                     strcpy(newfirst, "");
                     copysetwithoutempty(notterminalset->set, newfirst);
                     unionset(currentfirstset->set, newfirst);
 
                     int i = 0;
-                    int todostemvazio;
                     while ( i < (strlen(currentrule->rule) - 1) && isupper(currentrule->rule[i]) && (notterminalset = seekkey(head,currentrule->rule[i])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
                     {
                         if ((notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL)
                         {
-                            char *newfirst = (char *) malloc(500);
+                            char *newfirst = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
                             strcpy(newfirst, "");
                             copysetwithoutempty(notterminalset->set, newfirst);
                             unionset(currentfirstset->set,newfirst);
                         }
                         i++;
-                    } //Nao precisa de nada aqui dentro mesmo
-                    todostemvazio = i == strlen(currentrule->rule) && (notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO);
-                    if (todostemvazio)
+                    }
+
+                    if (i == strlen(currentrule->rule) && (notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
                         unionset(currentfirstset->set, "*");
-
-
                 }
 
                 if (containinset(currentrule->rule, CARACTER_VAZIO))
@@ -83,8 +80,6 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
 
             if (!mudou)
                 mudou = beforelength != strlen(currentfirstset->set);
-
-
 
             currentrule = currentrule->next;
         }

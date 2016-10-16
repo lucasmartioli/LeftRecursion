@@ -5,7 +5,7 @@
 #ifndef PREDICTIONTABLE_FIRST_H
 #define PREDICTIONTABLE_FIRST_H
 
-    #include "readgramar.h"
+    #include "readgrammar.h"
 
     struct firstset
     {
@@ -16,7 +16,7 @@
 
     typedef struct firstset FirstSet;
 
-    FirstSet *first(GramaticalRule *headgramaticalrule);
+    FirstSet *first(GrammarRule *headgramaticalrule);
     int containinset(char *rule, char c);
     void copysetwithoutempty(char *setsource, char *setdestination);
     void copyset(char *setsource, char *setdestination);
