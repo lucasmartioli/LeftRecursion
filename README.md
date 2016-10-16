@@ -1,6 +1,21 @@
 # PredictionTable
 Gera a tabela preditiva para um parser preditivo, dado uma gramática
 
+# Compilação
+
+**Para compilar no linux Ubunto 16 LTS:**
+
+Na pasta **PredictionTable** executar comando **cmake .**
+Também na pasta executar o comando **make**
+
+Para testar executar **./PredictionTable <nome_do_arquivo_de_entrada>**
+
+**Para compilar no Windows:**
+
+# Detalhes de implementação
+
+Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **"*"**.
+
 struct **GramaticalRule**
 {
 
