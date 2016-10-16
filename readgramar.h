@@ -5,7 +5,10 @@
 #ifndef PREDICTIONTABLE_READGRAMAR_H
 #define PREDICTIONTABLE_READGRAMAR_H
 
-#include <stdio.h>
+    #include <stdio.h>
+
+    #define CARACTER_VAZIO '*'
+    #define CARACTER_FINAL_ARQUIVO '$'
 
     struct gramaticalrule
     {
@@ -16,7 +19,6 @@
 
     typedef struct gramaticalrule GramaticalRule;
 
-    //int openfile(char *filename, FILE *arquivoDeEntrada);
     GramaticalRule* readgramar(char *filename);
     int readRule(FILE *arquivoDeEntrada, GramaticalRule* gramarrule);
 

@@ -1,0 +1,24 @@
+﻿#include <stdio.h>
+#include "readgramar.h"
+#include "conjunto.h"
+#include <malloc.h>
+
+first(){
+    repeat{
+        //gramaticalrule *t = s; //lista de todas as produções
+        if (x1 é um terminal) {
+            listaFirst(alfa) = {x1}
+
+        } else {
+            listaFirst(alfa) = listaFirst(x1) - '$';
+            for (int i = 1; i <= N; i++) {
+                if ('$' está em qualquer primeiroLista){
+                    primeiroFirst(alfa) = primeiroFirst(alfa) união primeiroFirst(Xi) - '$';
+                }
+            }
+        }
+        if (alfa == '$') {
+            primeiroFirst(alfa) União {'$'}
+        }
+    };//until no change;
+}

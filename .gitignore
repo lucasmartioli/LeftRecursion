@@ -32,5 +32,5 @@
 *.dSYM/
 *.su
 
-#settings
-.idea/
+# IDE files
+*.xml
