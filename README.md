@@ -12,18 +12,24 @@ Para testar executar **"./PredictionTable nome_do_arquivo_de_entrada"**
 
 **Para compilar no Windows:**
 
-# Detalhes de implementação
+# Detalhes de execução
 
 Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **"*"**.
 
-struct **GramaticalRule**
-{
+Como resultado do algoritmo temos os arquivos: **first.txt**.
 
-    struct GramaticalRule *next;
-    char *rule;
-    char key;
-      
-}
+# Detalhes de implementação
+
+```
+struct GramaticalRule
+   {
+   
+       struct GramaticalRule *next;
+       char *rule;
+       char key;
+         
+   }
+```
 
 S-aSb
 S-ab
