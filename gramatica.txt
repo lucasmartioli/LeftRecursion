@@ -1,4 +1,4 @@
-S-XYZ
+S-XYZ$
 X-aXb|*
 Y-cYZcX|d
 Z-eZYe|f
