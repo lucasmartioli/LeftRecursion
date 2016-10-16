@@ -4,10 +4,11 @@
 
 #include <malloc.h>
 #include <string.h>
+#include <ctype.h>
 #include "readgrammar.h"
 #include "conjunto.h"
 #include "follow.h"
-#include <regex.h>
+//#include <regex.h>
 
 Conjunto conjunto;
 Conjunto *conjuntos;
@@ -16,17 +17,17 @@ char keyAtual;
 int quantidadeDeproducoes = 0;
 FollowSet *f;
 
-int isTerminal(char producao){
-    char *str = &producao;
-    size_t maxGroup = 1;
-    regmatch_t groupArray[maxGroup];
-
-    regex_t regex;
-    if(regcomp(&regex, "[a-z]", REG_EXTENDED))
-        printf("Erro ao compilar regex");
-
-    return !(regexec(&regex, str, maxGroup, groupArray, 0));
-}
+//int isTerminal(char producao){
+//    char *str = &producao;
+//    size_t maxGroup = 1;
+//    regmatch_t groupArray[maxGroup];
+//
+//    regex_t regex;
+//    if(regcomp(&regex, "[a-z]", REG_EXTENDED))
+//        printf("Erro ao compilar regex");
+//
+//    return !(regexec(&regex, str, maxGroup, groupArray, 0));
+//}
 
 FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules){
     GrammarRule* atual = gramaticalRules;
@@ -69,10 +70,10 @@ Conjunto *follow(GrammarRule *gramaticalRules) {
         int qtdeSimbolos = sizeof(rule);
         for (int i = 0; i < qtdeSimbolos; ++i) {
             char simbolo = rule[i];
-            if (!isTerminal(simbolo)) {
+            if (isupper(simbolo)) {
                 char proximo = rule[i + 1];
                 if (proximo != '\0') {
-                    if (isTerminal(proximo))
+                    if (islower(proximo))
                         addFollow(simbolo, proximo);
                     else
                         addFollow(simbolo, getFirst(proximo));
