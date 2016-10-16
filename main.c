@@ -7,6 +7,7 @@
 #include <malloc.h>
 #include "readgramar.h"
 #include "first.h"
+#include "follow.h"
 
 int writefirstset(FirstSet *firstset);
 
@@ -37,6 +38,8 @@ int main(int argc, char *argv[])
     if (!writefirstset(f))
         return 0;
 
+    atual = s;
+    follow(atual);
 
     return 1;
 }
