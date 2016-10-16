@@ -12,8 +12,8 @@
 void geraPredTable(){
 
 
-    for (int i = 0; i < ; ++i) {
-        for (int j = 0; j < ; ++j) {
+    for (int linha = 0; linha < ; linha++) {
+        for (int coluna = 0; coluna < ; coluna) {
 
             case 1:{
 
