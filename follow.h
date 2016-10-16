@@ -8,6 +8,15 @@
 #include "conjunto.h"
 #include "readgramar.h"
 
-Conjunto* follow(GramaticalRule* gramaticalRules);
+struct followset
+{
+    struct followset *next;
+    char *set;
+    char key;
+};
+
+typedef struct followset FollowSet;
+
+Conjunto *follow(GramaticalRule *gramaticalRules);
 
 #endif //PREDICTIONTABLE_FOLLOW_H
