@@ -7,8 +7,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include "readgramar.h"
-
-#define TAMANHO_MAXIMO_DA_REGRA 500
+#include "grammar.h"
 
 GramaticalRule* readgramar(char *filename)
 {

@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include "first.h"
-#include "readgramar.h"
+#include "grammar.h"
 
 FirstSet *first(GramaticalRule *headgramaticalrule)
 {
@@ -29,7 +29,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
             {
                 currentfirstset = (FirstSet*) malloc(sizeof(FirstSet));
                 currentfirstset->key = key;
-                currentfirstset->set = (char*) malloc(500);
+                currentfirstset->set = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
                 strcpy(currentfirstset->set, "");
                 currentfirstset->next = NULL;
                 if (head == NULL)
@@ -50,7 +50,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     setcrule[1] = '\0';
                     unionset(currentfirstset->set, setcrule);
                 } else if ((notterminalset = seekkey(head,crule)) != NULL) {
-                    char *newfirst = (char *) malloc(500);
+                    char *newfirst = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
                     strcpy(newfirst, "");
                     copysetwithoutempty(notterminalset->set, newfirst);
                     unionset(currentfirstset->set, newfirst);
@@ -60,7 +60,7 @@ FirstSet *first(GramaticalRule *headgramaticalrule)
                     {
                         if ((notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL)
                         {
-                            char *newfirst = (char *) malloc(500);
+                            char *newfirst = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
                             strcpy(newfirst, "");
                             copysetwithoutempty(notterminalset->set, newfirst);
                             unionset(currentfirstset->set,newfirst);

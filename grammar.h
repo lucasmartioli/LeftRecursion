@@ -1,0 +1,12 @@
+//
+// Created by Lucas on 10/16/2016.
+//
+
+#ifndef PREDICTIONTABLE_GRAMMAR_H
+#define PREDICTIONTABLE_GRAMMAR_H
+
+    #define CARACTER_VAZIO '*'
+    #define CARACTER_FINAL_ARQUIVO '$'
+    #define TAMANHO_MAXIMO_DA_REGRA 500
+
+#endif //PREDICTIONTABLE_GRAMMAR_H

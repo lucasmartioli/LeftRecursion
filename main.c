@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
     if (!writefirstset(f))
         return 0;
 
-
     return 1;
 }
 
