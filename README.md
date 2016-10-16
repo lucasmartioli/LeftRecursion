@@ -35,7 +35,7 @@ S-aSb
 S-ab
 
 ```
-struct **GramaticalRule** gramatica;
+GramaticalRule *gramatica;
 
 char *rule1 = "aSb";
 
@@ -43,7 +43,7 @@ gramatica.key = 'S';
 gramatica.rule = rule1;
 gramatica.next = NULL;
 
-struct **GramaticalRule** novaRegra;
+GramaticalRule *novaRegra;
 
 char *rule2 = "ab" ;
 
@@ -52,17 +52,6 @@ novaRegra.rule = rule2;
 novaRegra.next = NULL;
 
 gramatica.next = *novaRegra;
-
-
-struct **AlgorithmsResult**
-{
-
-    struct AlgorithmsResult *next;
-    char *first;
-    char *follow;
-    char key;
-	
-}
 ```
 
 
