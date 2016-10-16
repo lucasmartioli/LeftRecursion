@@ -10,35 +10,42 @@
 #include "follow.h"
 //#include <regex.h>
 
-Conjunto conjunto;
-Conjunto *conjuntos;
+struct mudanca
+{
+    struct mudanca *next;
+    int tamanho;
+    char key;
+};
+
+typedef struct mudanca Mudanca;
 
 char keyAtual;
 int quantidadeDeproducoes = 0;
 FollowSet *f;
+Mudanca *m;
 FirstSet *firsts;
 
 
-//int isTerminal(char producao){
-//    char *str = &producao;
-//    size_t maxGroup = 1;
-//    regmatch_t groupArray[maxGroup];
-//
-//    regex_t regex;
-//    if(regcomp(&regex, "[a-z]", REG_EXTENDED))
-//        printf("Erro ao compilar regex");
-//
-//    return !(regexec(&regex, str, maxGroup, groupArray, 0));
-//}
-
+Mudanca *criaMudancas(GrammarRule *grammarRule){
+    GrammarRule *atual = grammarRule;
+    if (atual != NULL) {
+        m->key = atual->key;
+        m->tamanho = 0;
+        m->next = criaMudancas(atual->next);
+        return m;
+    }
+    return NULL;
+}
 
 FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules) {
     GrammarRule *atual = gramaticalRules;
     if (atual != NULL) {
         f = (FollowSet *) malloc(sizeof(FollowSet));
+
         f->key = atual->key;
         f->set = "";
         f->next = criaConjuntosFollow(atual->next);
+
         return f;
     }
     return NULL;
@@ -73,15 +80,32 @@ char *getFirst(char simbolo) {
     return pesquisa->set;
 }
 
-int houveMudancas(){
-    FollowSet *conjuntosFollow = f;
+Mudanca *getMudanca(char key){
+    Mudanca *pesquisa = m;
+    while (pesquisa != NULL){
+        if(pesquisa->key ==  key)
+            return pesquisa;
+    }
+    return NULL;
+}
 
+int houveMudancas(){
+    int mudou = 0;
+    FollowSet *conjuntosFollow = f;
+    while(conjuntosFollow != NULL){
+        Mudanca *m = getMudanca(f->key);
+        if(m->tamanho != strlen(f->set)) {
+            mudou = 1;
+            m->tamanho = strlen(f->set);
+        }
+    }
 }
 
 
-Conjunto *follow(GrammarRule *gramaticalRules, FirstSet *firstSet) {
+FollowSet *follow(GrammarRule *gramaticalRules, FirstSet *firstSet) {
     firsts = firstSet;
     criaConjuntosFollow(gramaticalRules);
+    criaMudancas(gramaticalRules);
 
     int mudou = 0;
     GrammarRule *atual = gramaticalRules;
@@ -110,5 +134,5 @@ Conjunto *follow(GrammarRule *gramaticalRules, FirstSet *firstSet) {
     }while(mudou);
 
 
-    return NULL;
+    return f;
 }

@@ -72,6 +72,8 @@ int writefirstset(FirstSet *firstset)
         firstset = firstset->next;
     }
 
+
+
     fclose(firstfile);
     return 1;
 
