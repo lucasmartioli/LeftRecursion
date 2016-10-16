@@ -6,8 +6,8 @@
 #define PREDICTIONTABLE_FOLLOW_H
 
 #include "conjunto.h"
-#include "readgramar.h"
+#include "readgrammar.h"
 
-Conjunto* follow(GramaticalRule* gramaticalRules);
+Conjunto* follow(GrammarRule* gramaticalRules);
 
 #endif //PREDICTIONTABLE_FOLLOW_H

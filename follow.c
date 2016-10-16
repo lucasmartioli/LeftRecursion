@@ -3,11 +3,11 @@
 //
 
 #include <malloc.h>
-#include "readgramar.h"
+#include "readgrammar.h"
 
 #include "conjunto.h"
 
-Conjunto *follow(GramaticalRule *gramaticalRules) {
+Conjunto *follow(GrammarRule *gramaticalRules) {
     char key = gramaticalRules->key;
     while(key != NULL){
         gramaticalRules++;

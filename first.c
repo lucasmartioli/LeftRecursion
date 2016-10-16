@@ -9,18 +9,18 @@
 #include "first.h"
 #include "grammar.h"
 
-FirstSet *first(GramaticalRule *headgramaticalrule)
+FirstSet *first(GrammarRule *headgramaticalrule)
 {
     FirstSet *head = NULL;
 
 
-    //CARACTER_VAZIO esta definido em readgramar.h
+    //CARACTER_VAZIO esta definido em readgrammar.h
     //CARACTER_FINAL_ARQUIVO
     int mudou;
     do
     {
         mudou = false;
-        GramaticalRule *currentrule = headgramaticalrule;
+        GrammarRule *currentrule = headgramaticalrule;
         while (currentrule != NULL)
         {
             char key = currentrule->key;

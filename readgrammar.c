@@ -6,10 +6,10 @@
 #include <string.h>
 #include <malloc.h>
 #include <stdbool.h>
-#include "readgramar.h"
+#include "readgrammar.h"
 #include "grammar.h"
 
-GramaticalRule* readgramar(char *filename)
+GrammarRule* readgrammar(char *filename)
 {
     FILE *arquivoDeEntrada = fopen(filename, "rt");
 
@@ -19,16 +19,16 @@ GramaticalRule* readgramar(char *filename)
         return 0;
     }
 
-    GramaticalRule *s = (GramaticalRule*) malloc(sizeof(GramaticalRule));
+    GrammarRule *s = (GrammarRule*) malloc(sizeof(GrammarRule));
     s->next = NULL;
     if (!readRule(arquivoDeEntrada, s))
         return NULL;
 
-    GramaticalRule *currentgrammarrule = s;
-    GramaticalRule *nextgrammarrule;
+    GrammarRule *currentgrammarrule = s;
+    GrammarRule *nextgrammarrule;
     while (!feof(arquivoDeEntrada))
     {
-        nextgrammarrule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
+        nextgrammarrule = (GrammarRule*) malloc(sizeof(GrammarRule));
         nextgrammarrule->next = NULL;
 
         if (!readRule(arquivoDeEntrada, nextgrammarrule))
@@ -45,7 +45,7 @@ GramaticalRule* readgramar(char *filename)
     return s;
 }
 
-int readRule(FILE *arquivoDeEntrada, GramaticalRule  *gramarrule) {
+int readRule(FILE *arquivoDeEntrada, GrammarRule  *gramarrule) {
 
 
     int currentchar;
@@ -76,7 +76,7 @@ int readRule(FILE *arquivoDeEntrada, GramaticalRule  *gramarrule) {
         memcpy(&gramarrule->rule[ruleLength], "", 1);
 
         if (currentchar == '|') {
-            GramaticalRule *nextgrammarrule = (GramaticalRule*) malloc(sizeof(GramaticalRule));
+            GrammarRule *nextgrammarrule = (GrammarRule*) malloc(sizeof(GrammarRule));
             nextgrammarrule->key = gramarrule->key;
             nextgrammarrule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
             strcpy(nextgrammarrule->rule, "");

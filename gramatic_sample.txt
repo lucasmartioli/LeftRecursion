@@ -1,6 +1,6 @@
-struct GramaticalRule
+struct GrammarRule
 {
-  struct GramaticalRule *next;
+  struct GrammarRule *next;
   char *rule;
   char key;
 }
@@ -9,7 +9,7 @@ struct GramaticalRule
 S-aSb
 S-ab
 
-struct GramaticalRule gramatica;
+struct GrammarRule gramatica;
 
 char *rule1 = "aSb" ;
 
@@ -17,7 +17,7 @@ gramatica.key = 'S';
 gramatica.rule = rule1;
 gramatica.next = NULL;
 
-struct GramaticalRule novaRegra;
+struct GrammarRule novaRegra;
 
 char *rule2 = "ab" ;
 

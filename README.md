@@ -21,7 +21,7 @@ Como resultado do algoritmo temos os arquivos: **first.txt**.
 # Detalhes de implementação
 
 ```
-struct GramaticalRule
+struct GrammarRule
    {
    
        struct GramaticalRule *next;
@@ -35,7 +35,7 @@ S-aSb
 S-ab
 
 ```
-GramaticalRule *gramatica;
+GrammarRule *gramatica;
 
 char *rule1 = "aSb";
 
@@ -43,7 +43,7 @@ gramatica.key = 'S';
 gramatica.rule = rule1;
 gramatica.next = NULL;
 
-GramaticalRule *novaRegra;
+GrammarRule *novaRegra;
 
 char *rule2 = "ab" ;
 
