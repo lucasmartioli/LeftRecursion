@@ -4,10 +4,11 @@
 
 #include <malloc.h>
 #include <string.h>
+#include <ctype.h>
 #include "readgrammar.h"
 #include "conjunto.h"
 #include "follow.h"
-#include <regex.h>
+//#include <regex.h>
 
 Conjunto conjunto;
 Conjunto *conjuntos;
@@ -17,17 +18,19 @@ int quantidadeDeproducoes = 0;
 FollowSet *f;
 FirstSet *firsts;
 
-int isTerminal(char producao) {
-    char *str = &producao;
-    size_t maxGroup = 1;
-    regmatch_t groupArray[maxGroup];
 
-    regex_t regex;
-    if (regcomp(&regex, "[a-z]", REG_EXTENDED))
-        printf("Erro ao compilar regex");
+//int isTerminal(char producao){
+//    char *str = &producao;
+//    size_t maxGroup = 1;
+//    regmatch_t groupArray[maxGroup];
+//
+//    regex_t regex;
+//    if(regcomp(&regex, "[a-z]", REG_EXTENDED))
+//        printf("Erro ao compilar regex");
+//
+//    return !(regexec(&regex, str, maxGroup, groupArray, 0));
+//}
 
-    return !(regexec(&regex, str, maxGroup, groupArray, 0));
-}
 
 FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules) {
     GrammarRule *atual = gramaticalRules;
@@ -82,18 +85,18 @@ Conjunto *follow(GrammarRule *gramaticalRules, FirstSet *firstSet) {
 
     int mudou = 0;
     GrammarRule *atual = gramaticalRules;
+
     do {
         mudou = 0;
-        while (atual != NULL) {
+        while(atual != NULL) {
             char *rule = atual->rule;
-            int qtdeSimbolos = strlen(rule);
+            int qtdeSimbolos = sizeof(rule);
             for (int i = 0; i < qtdeSimbolos; ++i) {
-
                 char simbolo = rule[i];
-                if (!isTerminal(simbolo)) {
+                if (isupper(simbolo)) {
                     char proximo = rule[i + 1];
                     if (proximo != '\0') {
-                        if (isTerminal(proximo))
+                        if (islower(proximo))
                             addFollow(simbolo, proximo);
                         else
                             addFollows(simbolo, getFirst(proximo));
