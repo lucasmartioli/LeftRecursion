@@ -6,14 +6,14 @@
 #include "readgrammar.h"
 #include "first.c"
 #include "follow.c"
-
+#include "geraTabela.h"
 
 
 void geraPredTable(){
 
 
-    for (int linha = 0; linha < ; linha++) {
-        for (int coluna = 0; coluna < ; coluna) {
+    for (int linha = 0; linha < (); linha++) {
+        for (int coluna = 0; coluna < (); coluna) {
 
             case 1:{
 
