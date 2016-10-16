@@ -7,6 +7,7 @@
 
 #include "conjunto.h"
 #include "readgrammar.h"
+#include "first.h"
 
 struct followset
 {
@@ -18,6 +19,6 @@ struct followset
 typedef struct followset FollowSet;
 
 
-Conjunto* follow(GrammarRule* gramaticalRules);
+Conjunto* follow(GrammarRule* gramaticalRules, FirstSet* firstSet);
 
 #endif //PREDICTIONTABLE_FOLLOW_H

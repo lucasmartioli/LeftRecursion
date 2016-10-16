@@ -104,8 +104,7 @@ FirstSet *seekkey(FirstSet *firstset, char key)
     return NULL;
 }
 
-int containinset(char *rule, char c)
-{
+int containinset(char *rule, char c) {
     for (int i = 0; i < strlen(rule); i++) {
         if(rule[i] == c)
             return 1;
