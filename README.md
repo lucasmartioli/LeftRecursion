@@ -5,10 +5,10 @@ Gera a tabela preditiva para um parser preditivo, dado uma gramática
 
 **Para compilar no linux Ubunto 16 LTS:**
 
-Na pasta **PredictionTable** executar comando **cmake .**
-Também na pasta executar o comando **make**
+Na pasta **PredictionTable** executar comando **"cmake ."**
+Também na pasta executar o comando **"make"**
 
-Para testar executar **./PredictionTable <nome_do_arquivo_de_entrada>**
+Para testar executar **"./PredictionTable <nome_do_arquivo_de_entrada>"**
 
 **Para compilar no Windows:**
 
