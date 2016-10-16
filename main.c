@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
 int writefirstset(FirstSet *firstset)
 {
-    FILE *firstfile = fopen("C:\\Users\\Lucas\\first.txt", "w");
+    FILE *firstfile = fopen("first.txt", "w");
 
     if (firstfile == NULL)
     {
