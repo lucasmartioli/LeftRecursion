@@ -98,12 +98,11 @@ FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset) {
                     copysetwithoutempty(simbolofirstset->set, rhs);
                     if (!mudou)
                         mudou = beforelength != strlen(newfollowset->set);
-                } else {
+                } else if (simbolo != CARACTER_VAZIO && simbolo != CARACTER_FINAL_ARQUIVO) {
                     char *newsimb = (char*) malloc(2);
                     newsimb[0] = simbolo;
                     newsimb[1] = '\0';
-                    unionset(rhs, newsimb);
-                    //int beforelength = strlen(newfollowset->set);
+                    rhs = newsimb;
                 }
             }
 
