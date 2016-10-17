@@ -7,9 +7,10 @@
 #include <malloc.h>
 #include "readgrammar.h"
 #include "first.h"
-#include "follow.h"
+#include "follow2.h"
 
 int writefirstset(FirstSet *firstset);
+int writefollowset(FollowSet *followset);
 
 int main(int argc, char *argv[])
 {
@@ -27,24 +28,13 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    GrammarRule* atual = s;
-    while (atual != NULL)
-    {
-        printf("Key: %c Regra: %s \n", atual->key, atual->rule);
-        atual = atual->next;
-    }
-
     FirstSet * f = first(s);
     if (!writefirstset(f))
         return 0;
 
     FollowSet *followset = follow(s, f);
-    FollowSet *ff = followset;
-    while (ff != NULL)
-    {
-        printf("Key: %c Set: %s\n", ff->key, ff->set);
-        ff = ff->next;
-    }
+    if (!writefollowset(followset))
+        return 0;
 
     return 1;
 }
@@ -79,11 +69,39 @@ int writefirstset(FirstSet *firstset)
         firstset = firstset->next;
     }
 
-
-
     fclose(firstfile);
     return 1;
 
+}
 
+int writefollowset(FollowSet *followset)
+{
+    FILE *followfile = fopen("follow.txt", "w");
+
+    if (followfile == NULL) {
+        printf("Problemas na criação do arquivo follow\n");
+        return 0;
+    }
+
+    while (followset != NULL) {
+        char *desc1 = "Conjunto: ";
+        char *notterminal = (char *) malloc(2);
+        notterminal[0] = followset->key;
+        notterminal[1] = '\0';
+        char *desc2 = " = {";
+
+        if (fwrite(desc1, 1, strlen(desc1), followfile) != strlen(desc1) ||
+            fwrite(notterminal, 1, 1, followfile) != 1 ||
+            fwrite(desc2, 1, strlen(desc2), followfile) != strlen(desc2) ||
+            fwrite(followset->set, 1, strlen(followset->set), followfile) != strlen(followset->set) ||
+            fwrite("}\n", 1, 2, followfile) != 2) {
+            printf("Erro na escrita do arquivo");
+            return 0;
+        }
+        followset = followset->next;
+    }
+
+    fclose(followfile);
+    return 1;
 }
 

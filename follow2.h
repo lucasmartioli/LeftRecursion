@@ -5,6 +5,8 @@
 #ifndef PREDICTIONTABLE_FOLLOW2_H
 #define PREDICTIONTABLE_FOLLOW2_H
 
+#include "first.h"
+
 struct followset
 {
     struct followset *next;
@@ -13,6 +15,6 @@ struct followset
 };
 
 typedef struct followset FollowSet;
-
+FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset);
 
 #endif //PREDICTIONTABLE_FOLLOW2_H
