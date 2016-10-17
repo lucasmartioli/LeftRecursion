@@ -1,138 +1,114 @@
 //
-// Created by sutil on 13/10/16.
+// Created by Lucas on 10/16/2016.
 //
 
 #include <malloc.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "readgrammar.h"
-#include "conjunto.h"
+#include "grammar.h"
 #include "follow.h"
-//#include <regex.h>
+#include "first.h"
 
-struct mudanca
+FollowSet *pesquisaConjuntoFollow(FollowSet* head, char key)
 {
-    struct mudanca *next;
-    int tamanho;
-    char key;
-};
-
-typedef struct mudanca Mudanca;
-
-char keyAtual;
-int quantidadeDeproducoes = 0;
-FollowSet *f;
-Mudanca *m;
-FirstSet *firsts;
-
-
-Mudanca *criaMudancas(GrammarRule *grammarRule){
-    GrammarRule *atual = grammarRule;
-    if (atual != NULL) {
-        m->key = atual->key;
-        m->tamanho = 0;
-        m->next = criaMudancas(atual->next);
-        return m;
-    }
-    return NULL;
-}
-
-FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules) {
-    GrammarRule *atual = gramaticalRules;
-    if (atual != NULL) {
-        f = (FollowSet *) malloc(sizeof(FollowSet));
-
-        f->key = atual->key;
-        f->set = "";
-        f->next = criaConjuntosFollow(atual->next);
-
-        return f;
-    }
-    return NULL;
-}
-
-FollowSet *pesquisaConjuntoFollow(char key) {
-    FollowSet *pesquisa = f;
+    FollowSet* pesquisa = head;
     while (pesquisa != NULL && pesquisa->key != key)
         pesquisa = pesquisa->next;
 
     return pesquisa;
 }
 
-void addFollow(char key, char simbolo) {
-    FollowSet *followSet = pesquisaConjuntoFollow(key);
-    if(!containinset(followSet->set, simbolo))
-        followSet->set = strcat(followSet->set, &simbolo);
-}
+FollowSet *criaConjuntosFollow(GrammarRule *gramaticalRules){
+    FollowSet* head = NULL;
+    GrammarRule* atual = gramaticalRules;
+    while (atual != NULL){
+        FollowSet *f = pesquisaConjuntoFollow(head, atual->key);
+        if (f == NULL) {
+            f = (FollowSet *) malloc(sizeof(FollowSet));
+            f->key = atual->key;
+            f->set = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
+            if(f->key == 'S')
+            {
+                f->set[0] = '$';
+                f->set[1] = '\0';
+            } else {
+                f->set[0] = '\0';
+            }
 
-void addFollows(char key, char *simbolo) {
-    int tamanho = strlen(simbolo);
-    for (int i = 0; i < tamanho; ++i)
-        addFollow(key, simbolo[i]);
+            f->next = NULL;
 
-}
+            if (head == NULL)
+                head = f;
+            else
+            {
+                FollowSet *ff = head;
+                while (ff->next != NULL)
+                {
+                    ff = ff->next;
+                }
+                ff->next = f;
+            }
+        }
 
-char *getFirst(char simbolo) {
-    FirstSet *pesquisa = firsts;
-
-    while (pesquisa != NULL && pesquisa->key != simbolo)
-        pesquisa = pesquisa->next;
-    return pesquisa->set;
-}
-
-Mudanca *getMudanca(char key){
-    Mudanca *pesquisa = m;
-    while (pesquisa != NULL){
-        if(pesquisa->key ==  key)
-            return pesquisa;
+        atual = atual->next;
     }
+    return head;
+}
+
+FirstSet *seekkeyfirst(FirstSet *firstset, char key)
+{
+    FirstSet *current = firstset;
+    while (current != NULL)
+    {
+        if (current->key == key)
+            return current;
+
+        current = current->next;
+    }
+
     return NULL;
 }
 
-int houveMudancas(){
-    int mudou = 0;
-    FollowSet *conjuntosFollow = f;
-    while(conjuntosFollow != NULL){
-        Mudanca *m = getMudanca(f->key);
-        if(m->tamanho != strlen(f->set)) {
-            mudou = 1;
-            m->tamanho = strlen(f->set);
-        }
-    }
-}
+FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset) {
 
+    FollowSet *head = criaConjuntosFollow(gramaticalRules);
 
-FollowSet *follow(GrammarRule *gramaticalRules, FirstSet *firstSet) {
-    firsts = firstSet;
-    criaConjuntosFollow(gramaticalRules);
-    criaMudancas(gramaticalRules);
-
-    int mudou = 0;
-    GrammarRule *atual = gramaticalRules;
-
+    int mudou;
     do {
-        mudou = 0;
-        while(atual != NULL) {
+        mudou = false;
+        GrammarRule *atual = gramaticalRules;
+        while (atual != NULL) {
             char *rule = atual->rule;
-            int qtdeSimbolos = sizeof(rule);
-            for (int i = 0; i < qtdeSimbolos; ++i) {
+            char *rhs = (char *) malloc(TAMANHO_MAXIMO_DA_REGRA);
+            FollowSet *currentfollowset = pesquisaConjuntoFollow(head, atual->key);
+            if (currentfollowset != NULL)
+                copyset(currentfollowset->set, rhs);
+            else
+                rhs[0] = '\0';
+
+            for (int i = strlen(rule) - 1; i >= 0; i--) {
                 char simbolo = rule[i];
                 if (isupper(simbolo)) {
-                    char proximo = rule[i + 1];
-                    if (proximo != '\0') {
-                        if (islower(proximo))
-                            addFollow(simbolo, proximo);
-                        else
-                            addFollows(simbolo, getFirst(proximo));
-                    }
+                    FollowSet *newfollowset = pesquisaConjuntoFollow(head, simbolo);
+                    int beforelength = strlen(newfollowset->set);
+                    unionset(newfollowset->set, rhs);
+                    FirstSet *simbolofirstset = seekkeyfirst(firstset, simbolo);
+                    copysetwithoutempty(simbolofirstset->set, rhs);
+                    if (!mudou)
+                        mudou = beforelength != strlen(newfollowset->set);
+                } else if (simbolo != CARACTER_VAZIO && simbolo != CARACTER_FINAL_ARQUIVO) {
+                    char *newsimb = (char*) malloc(2);
+                    newsimb[0] = simbolo;
+                    newsimb[1] = '\0';
+                    rhs = newsimb;
                 }
             }
+
+            atual = atual->next;
         }
-        atual = gramaticalRules;
+    } while (mudou);
 
-        mudou = houveMudancas();
-    }while(mudou);
-
-
-    return f;
+    return head;
 }

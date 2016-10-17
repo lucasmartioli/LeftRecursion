@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include "readgrammar.h"
 #include "first.h"
-#include "follow2.h"
+#include "follow.h"
 
 int writefirstset(FirstSet *firstset);
 int writefollowset(FollowSet *followset);

@@ -1,12 +1,10 @@
 //
-// Created by sutil on 13/10/16.
+// Created by Lucas on 10/16/2016.
 //
 
-#ifndef PREDICTIONTABLE_FOLLOW_H
-#define PREDICTIONTABLE_FOLLOW_H
+#ifndef PREDICTIONTABLE_FOLLOW2_H
+#define PREDICTIONTABLE_FOLLOW2_H
 
-#include "conjunto.h"
-#include "readgrammar.h"
 #include "first.h"
 
 struct followset
@@ -17,8 +15,6 @@ struct followset
 };
 
 typedef struct followset FollowSet;
+FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset);
 
-
-FollowSet* follow(GrammarRule* gramaticalRules, FirstSet* firstSet);
-
-#endif //PREDICTIONTABLE_FOLLOW_H
+#endif //PREDICTIONTABLE_FOLLOW2_H
