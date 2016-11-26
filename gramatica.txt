@@ -1,4 +1,6 @@
-S-XYZ$
-X-aXb|*
-Y-cYZcX|d
-Z-eZYe|f
+S-E
+E-TW
+W-+TW|e
+T-FX
+X-*FX|e
+F-(E)|i

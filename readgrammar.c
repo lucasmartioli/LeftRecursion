@@ -66,8 +66,13 @@ int readRule(FILE *arquivoDeEntrada, GrammarRule  *gramarrule) {
         int ruleLength = 0;
         while (!feof(arquivoDeEntrada) && (currentchar = fgetc(arquivoDeEntrada)) != '|' && currentchar != '\n' && currentchar != EOF &&
                ruleLength < TAMANHO_MAXIMO_DA_REGRA - 1) {
-            memcpy(&gramarrule->rule[ruleLength], &currentchar, 1);
-            ruleLength++;
+            if (currentchar != ' ')
+            {
+                memcpy(&gramarrule->rule[ruleLength], &currentchar, 1);
+                ruleLength++;
+            }
+
+
         };
 
         if (ruleLength >= TAMANHO_MAXIMO_DA_REGRA - 1)

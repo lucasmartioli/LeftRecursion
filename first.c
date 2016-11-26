@@ -43,7 +43,7 @@ FirstSet *first(GrammarRule *headgramaticalrule)
             {
                 FirstSet *notterminalset;
                 char crule = currentrule->rule[0];
-                if (islower(crule))
+                if (!isupper(crule)) // || (crule >= 33 && crule <= 47)
                 {
                     char *setcrule = (char*) malloc(2);
                     setcrule[0] = crule;
@@ -69,11 +69,11 @@ FirstSet *first(GrammarRule *headgramaticalrule)
                     }
 
                     if (i == strlen(currentrule->rule) && (notterminalset = seekkey(head,currentrule->rule[i + 1])) != NULL && containinset(notterminalset->set, CARACTER_VAZIO))
-                        unionset(currentfirstset->set, "*");
+                        unionset(currentfirstset->set, CARACTER_VAZIO_STRING);
                 }
 
                 if (containinset(currentrule->rule, CARACTER_VAZIO))
-                    unionset(currentfirstset->set, "*");
+                    unionset(currentfirstset->set, CARACTER_VAZIO_STRING);
 
             }
 
