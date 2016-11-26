@@ -94,11 +94,15 @@ FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset) {
                     FollowSet *newfollowset = pesquisaConjuntoFollow(head, simbolo);
                     int beforelength = strlen(newfollowset->set);
                     unionset(newfollowset->set, rhs);
+                    if (i+1 < strlen(rule) && isupper(rule[i+1]) && containinset(seekkeyfirst(firstset,rule[i+1])->set,CARACTER_VAZIO)){
+                        unionset(newfollowset->set, currentfollowset->set);
+
+                    }
                     FirstSet *simbolofirstset = seekkeyfirst(firstset, simbolo);
                     copysetwithoutempty(simbolofirstset->set, rhs);
                     if (!mudou)
                         mudou = beforelength != strlen(newfollowset->set);
-                } else if (simbolo != CARACTER_VAZIO && simbolo != CARACTER_FINAL_ARQUIVO) {
+                } else if (simbolo != CARACTER_VAZIO) {
                     char *newsimb = (char*) malloc(2);
                     newsimb[0] = simbolo;
                     newsimb[1] = '\0';
