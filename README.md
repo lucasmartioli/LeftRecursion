@@ -10,13 +10,27 @@ Também na pasta executar o comando **"make"**
 
 Para testar executar **"./PredictionTable nome_do_arquivo_de_entrada"**
 
-**Para compilar no Windows:**
-
 # Detalhes de execução
 
-Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **"*"**.
+Para as gramaticas utilizadas, **NENHUM simbolo deve ter mais de um caracter**
 
-Como resultado do algoritmo temos os arquivos: **first.txt**.
+Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **e**.
+
+**GRAMATICA DE TESTE**
+
+```
+S-TW
+W-+TW|e
+T-FX
+X-*FX|
+X-e
+F-(S)|i
+```
+
+Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **tabela.csv**.
+
+
+
 
 # Detalhes de implementação
 

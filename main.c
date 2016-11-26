@@ -37,7 +37,8 @@ int main(int argc, char *argv[])
     if (!writefollowset(followset))
         return 0;
 
-    table(s, followset, f);
+    if (!table(s, followset, f))
+        return 0;
 
     return 1;
 }
@@ -76,7 +77,6 @@ int writefirstset(FirstSet *firstset)
     return 1;
 
 }
-
 int writefollowset(FollowSet *followset)
 {
     FILE *followfile = fopen("follow.txt", "w");

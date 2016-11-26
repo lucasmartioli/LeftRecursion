@@ -2,8 +2,6 @@
 // Created by Lucas on 11/26/2016.
 //
 
-
-
 #include <mem.h>
 #include <ctype.h>
 #include <malloc.h>
@@ -75,10 +73,10 @@ Producao *makeNewProducao(char NT, char* producao) {
     return novaProducao;
 }
 
-void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstset) {
+int table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstset) {
 
-    char* NTList = (char*) malloc(100);//mudar
-    char* TList = (char*) malloc(100);//mudar
+    char* NTList = (char*) malloc(100);
+    char* TList = (char*) malloc(100);
 
     NTList[0] = '\0';
     TList[0] = '$';
@@ -100,7 +98,10 @@ void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstse
         g = g->next;
     }
 
+
+
     Producao* matrix[strlen(NTList)][strlen(TList)];
+
 
     for (int j = 0; j < strlen(NTList); ++j) {
         for (int i = 0; i < strlen(TList); ++i) {
@@ -163,8 +164,104 @@ void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstse
         g = g->next;
     }
 
-    return;
+    if (!writetable(NTList, TList, matrix))
+        return 0;
 
+    return 1;
+
+
+}
+
+int writetable(char* NTList, char* TList, Producao* t[strlen(NTList)][strlen(TList)])
+{
+    FILE *tableFile = fopen("table.csv", "w");
+
+    if (tableFile == NULL)
+    {
+        printf("Problemas na criação do arquivo table\n");
+        return 0;
+    }
+
+    for (int k = 0; k < strlen(TList); ++k) {
+        char* c = (char*) malloc(2);
+        c[0] = TList[k];
+        c[1] = '\0';
+
+        if(fwrite(",", 1, 1, tableFile) != 1 ||
+           fwrite(c, 1, 1, tableFile) != 1)
+        {
+            printf("Erro na escrita do arquivo");
+            return 0;
+        }
+
+    }
+
+    if (fwrite("\n", 1, 1, tableFile) != 1)
+    {
+        printf("Erro na escrita do arquivo");
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(NTList); ++i) {
+        char* c = (char*) malloc(2);
+        c[0] = NTList[i];
+        c[1] = '\0';
+
+        if(fwrite(c, 1, 1, tableFile) != 1 ||
+           fwrite(",", 1, 1, tableFile) != 1)
+        {
+            printf("Erro na escrita do arquivo");
+            return 0;
+        }
+
+        for (int j = 0; j < strlen(TList); ++j) {
+            Producao* head = t[i][j];
+
+            if (head == NULL && (fwrite("ERRO", 1, 4, tableFile) != 4))
+            {
+                printf("Erro na escrita do arquivo");
+                return 0;
+            }
+
+            while ( head != NULL)
+            {
+
+                if(fwrite(head->p, 1, strlen(head->p), tableFile) != strlen(head->p))
+                {
+                    printf("Erro na escrita do arquivo");
+                    return 0;
+                }
+
+                head = head->next;
+
+                if (head != NULL && (fwrite(" | ", 1, 3, tableFile) != 3))
+                {
+                    printf("Erro na escrita do arquivo");
+                    return 0;
+                }
+            }
+
+            if(fwrite(",", 1, 1, tableFile) != 1)
+            {
+                printf("Erro na escrita do arquivo");
+                return 0;
+            }
+
+        }
+
+        if(fwrite("\n", 1, 1, tableFile) != 1)
+        {
+            printf("Erro na escrita do arquivo");
+            return 0;
+        }
+
+
+    }
+
+
+
+    fclose(tableFile);
+    return 1;
 
 }
 

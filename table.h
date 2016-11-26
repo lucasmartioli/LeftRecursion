@@ -21,6 +21,7 @@ typedef struct producao Producao;
 
 
 void addList(char *List, const char NT);
-void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstset);
+int table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstset);
+int writetable(char* NTList, char* TList, Producao* t[strlen(NTList)][strlen(TList)]);
 
 #endif //PREDICTIONTABLE_TABLE_H
