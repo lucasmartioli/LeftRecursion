@@ -8,7 +8,6 @@
 #include <ctype.h>
 #include <malloc.h>
 #include "table.h"
-#include "follow.h"
 
 void addList(char *List, const char NT){
 
@@ -113,12 +112,11 @@ void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstse
 
     g = gramaticalRules;
     while (g != NULL) {
-        char *set;
+        char *set = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
         if (isupper(g->rule[0])) {
             FirstSet *f = seekkeyfirst(firstset, g->rule[0]);
             set = f->set;
         } else {
-//            set = "            ";
             set[0] = g->rule[0];
             set[1] = '\0';
         }
@@ -160,11 +158,6 @@ void table(GrammarRule *gramaticalRules, FollowSet* followSet, FirstSet* firstse
             } else {
                 addProducao(matrix[NTIndex][TIndex], makeNewProducao(g->key, g->rule));
             }
-
-
-
-
-
         }
 
         g = g->next;
