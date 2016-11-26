@@ -16,6 +16,8 @@ Para as gramaticas utilizadas, **NENHUM simbolo deve ter mais de um caracter**
 
 Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **e**.
 
+Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **tabela.csv**.
+
 **GRAMATICA DE TESTE**
 
 ```
@@ -60,9 +62,6 @@ W	W-e	W-+TW	ERRO	ERRO	W-e	ERRO
 F	ERRO	ERRO	ERRO	F-(S)	ERRO	F-i
 X	X-e	X-e	X-*FX	ERRO	X-e	ERRO
 ```
-
-
-Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **tabela.csv**.
 
 
 
