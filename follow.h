@@ -16,5 +16,7 @@ struct followset
 
 typedef struct followset FollowSet;
 FollowSet *follow(GrammarRule *gramaticalRules, FirstSet* firstset);
+FirstSet *seekkeyfirst(FirstSet *firstset, char key);
+FollowSet *pesquisaConjuntoFollow(FollowSet* head, char key);
 
 #endif //PREDICTIONTABLE_FOLLOW2_H

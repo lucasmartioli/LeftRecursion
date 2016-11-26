@@ -8,6 +8,7 @@
 #include "readgrammar.h"
 #include "first.h"
 #include "follow.h"
+#include "table.h"
 
 int writefirstset(FirstSet *firstset);
 int writefollowset(FollowSet *followset);
@@ -35,6 +36,8 @@ int main(int argc, char *argv[])
     FollowSet *followset = follow(s, f);
     if (!writefollowset(followset))
         return 0;
+
+    table(s, followset, f);
 
     return 1;
 }

@@ -1,6 +1,6 @@
-S-E
-E-TW
+S-TW
 W-+TW|e
 T-FX
-X-*FX|e
-F-(E)|i
+X-*FX|
+X-e
+F-(S)|i
