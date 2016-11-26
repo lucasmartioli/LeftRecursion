@@ -27,6 +27,41 @@ X-e
 F-(S)|i
 ```
 
+
+**SAIDAS**
+
+**FIRST**
+
+```
+Conjunto: S = {(i}
+Conjunto: W = {+e}
+Conjunto: T = {(i}
+Conjunto: X = {*e}
+Conjunto: F = {(i}
+```
+
+**FOLLOW**
+
+```
+Conjunto: S = {$)}
+Conjunto: W = {$)}
+Conjunto: T = {+$)}
+Conjunto: X = {+$)}
+Conjunto: F = {*+$)}
+```
+
+**TABELA**
+
+```
+	$	+	*	(	)	i
+S	ERRO	ERRO	ERRO	S-TW	ERRO	S-TW
+T	ERRO	ERRO	ERRO	T-FX	ERRO	T-FX
+W	W-e	W-+TW	ERRO	ERRO	W-e	ERRO
+F	ERRO	ERRO	ERRO	F-(S)	ERRO	F-i
+X	X-e	X-e	X-*FX	ERRO	X-e	ERRO
+```
+
+
 Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **tabela.csv**.
 
 
