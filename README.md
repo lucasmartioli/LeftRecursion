@@ -3,7 +3,7 @@ Retira a recursão a esquerda, dado uma gramática.
 
 # Compilação
 
-**Para compilar no linux Ubunto 16 LTS:**
+**Para compilar no Linux:**
 
 Na pasta **PredictionTable** executar comando **"cmake ."**
 Também na pasta executar o comando **"make"**
@@ -15,8 +15,6 @@ Para testar executar **"./PredictionTable nome_do_arquivo_de_entrada"**
 Para as gramaticas utilizadas, **NENHUM simbolo deve ter mais de um caracter**
 
 Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **e**.
-
-Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **tabela.csv**.
 
 **GRAMATICA DE TESTE**
 
