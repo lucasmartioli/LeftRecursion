@@ -1,6 +1,2 @@
-S-TW
-W-+TW|e
-T-FX
-X-*FX|
-X-e
-F-(S)|i
+A-Ab|b|C
+C-CvvW|Cjj|n

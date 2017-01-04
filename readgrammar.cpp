@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <malloc.h>
-#include <stdbool.h>
+#include <iostream>
 #include "readgrammar.h"
 #include "grammar.h"
 
@@ -15,26 +15,26 @@ GrammarRule* readgrammar(char *filename)
 
     if (arquivoDeEntrada == NULL)
     {
-        printf("Problemas na abertura do arquivo\n");
-        return 0;
+        std::cout << "Problemas na abertura do arquivo" << std::endl;
+        return nullptr;
     }
 
     GrammarRule *s = (GrammarRule*) malloc(sizeof(GrammarRule));
     s->next = NULL;
     if (!readRule(arquivoDeEntrada, s))
-        return NULL;
+        return nullptr;
 
     GrammarRule *currentgrammarrule = s;
     GrammarRule *nextgrammarrule;
     while (!feof(arquivoDeEntrada))
     {
         nextgrammarrule = (GrammarRule*) malloc(sizeof(GrammarRule));
-        nextgrammarrule->next = NULL;
+        nextgrammarrule->next = nullptr;
 
         if (!readRule(arquivoDeEntrada, nextgrammarrule))
             break;
 
-        while (currentgrammarrule->next != NULL)
+        while (currentgrammarrule->next != nullptr)
             currentgrammarrule = currentgrammarrule->next;
 
         currentgrammarrule->next = nextgrammarrule;
@@ -45,47 +45,39 @@ GrammarRule* readgrammar(char *filename)
     return s;
 }
 
-int readRule(FILE *arquivoDeEntrada, GrammarRule  *gramarrule) {
+bool readRule(FILE *arquivoDeEntrada, GrammarRule  *gramarrule) {
 
 
-    int currentchar;
-    int key = fgetc(arquivoDeEntrada);
+    char currentchar;
+    char key = (char) fgetc(arquivoDeEntrada);
 
     if (!isupper(key))
-        return 0;
+        return false;
 
-    gramarrule->key = (char)key;
-    gramarrule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
-    strcpy(gramarrule->rule, "");
+    gramarrule->key = new std::string ("");
+    *gramarrule->key += key;
+    gramarrule->rule = new std::string ("");
 
     int separator = fgetc(arquivoDeEntrada);
     if (separator != '-')
-        return 0;
+        return false;
 
     while (true) {
-        int ruleLength = 0;
-        while (!feof(arquivoDeEntrada) && (currentchar = fgetc(arquivoDeEntrada)) != '|' && currentchar != '\n' && currentchar != EOF &&
-               ruleLength < TAMANHO_MAXIMO_DA_REGRA - 1) {
+
+        while (!feof(arquivoDeEntrada) && (currentchar = (char) fgetc(arquivoDeEntrada)) != '|' && currentchar != '\n' && currentchar != EOF) {
             if (currentchar != ' ')
             {
-                memcpy(&gramarrule->rule[ruleLength], &currentchar, 1);
-                ruleLength++;
+                *gramarrule->rule += currentchar;
+
             }
-
-
         };
-
-        if (ruleLength >= TAMANHO_MAXIMO_DA_REGRA - 1)
-            return 0;
-
-        memcpy(&gramarrule->rule[ruleLength], "", 1);
 
         if (currentchar == '|') {
             GrammarRule *nextgrammarrule = (GrammarRule*) malloc(sizeof(GrammarRule));
-            nextgrammarrule->key = gramarrule->key;
-            nextgrammarrule->rule = (char*) malloc(TAMANHO_MAXIMO_DA_REGRA);
-            strcpy(nextgrammarrule->rule, "");
-            nextgrammarrule->next = NULL;
+            nextgrammarrule->key = new std::string ("");
+            *nextgrammarrule->key += *gramarrule->key;
+            nextgrammarrule->rule = new std::string ("");
+            nextgrammarrule->next = nullptr;
             gramarrule->next = nextgrammarrule;
             gramarrule = nextgrammarrule;
             continue;
@@ -94,7 +86,7 @@ int readRule(FILE *arquivoDeEntrada, GrammarRule  *gramarrule) {
         break;
     };
 
-    return 1;
+    return true;
 }
 
 

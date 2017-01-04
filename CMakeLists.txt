@@ -1,5 +1,8 @@
+
+set(CMAKE_CXX_STANDARD 11)
+
 cmake_minimum_required(VERSION 3.5)
 project(PredictionTable)
 
-set(SOURCE_FILES main.c readgrammar.c conjunto.h first.c first.h grammar.h follow.c follow.h table.c table.h)
-add_executable(PredictionTable ${SOURCE_FILES} table.c table.h)
+set(SOURCE_FILES main.cpp readgrammar.cpp grammar.h lrecursionpurge.cpp lrecursionpurge.h)
+add_executable(PredictionTable ${SOURCE_FILES} )
