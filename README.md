@@ -1,5 +1,5 @@
-# PredictionTable
-Gera a tabela preditiva para um parser preditivo, dado uma gramática
+# LeftRecursion
+Retira a recursão a esquerda, dado uma gramática.
 
 # Compilação
 
@@ -21,86 +21,19 @@ Como resultado do algoritmo temos os arquivos: **first.txt** **follow.txt** e **
 **GRAMATICA DE TESTE**
 
 ```
-S-TW
-W-+TW|e
-T-FX
-X-*FX|
-X-e
-F-(S)|i
+A-Ab|b|C
+C-CvvW|Cjj|n
 ```
 
-
-**SAIDAS**
-
-**FIRST**
+**SAIDA**
 
 ```
-Conjunto: S = {(i}
-Conjunto: W = {+e}
-Conjunto: T = {(i}
-Conjunto: X = {*e}
-Conjunto: F = {(i}
+E-bE
+E-e
+A-bE
+A-CE
+H-vvWH
+H-e
+H-jjH
+C-nH
 ```
-
-**FOLLOW**
-
-```
-Conjunto: S = {$)}
-Conjunto: W = {$)}
-Conjunto: T = {+$)}
-Conjunto: X = {+$)}
-Conjunto: F = {*+$)}
-```
-
-**TABELA**
-
-```
-	$	+	*	(	)	i
-S	ERRO	ERRO	ERRO	S-TW	ERRO	S-TW
-T	ERRO	ERRO	ERRO	T-FX	ERRO	T-FX
-W	W-e	W-+TW	ERRO	ERRO	W-e	ERRO
-F	ERRO	ERRO	ERRO	F-(S)	ERRO	F-i
-X	X-e	X-e	X-*FX	ERRO	X-e	ERRO
-```
-
-
-
-
-# Detalhes de implementação
-
-```
-struct GrammarRule
-   {
-   
-       struct GramaticalRule *next;
-       char *rule;
-       char key;
-         
-   }
-```
-
-S-aSb
-S-ab
-
-```
-GrammarRule *gramatica;
-
-char *rule1 = "aSb";
-
-gramatica.key = 'S';
-gramatica.rule = rule1;
-gramatica.next = NULL;
-
-GrammarRule *novaRegra;
-
-char *rule2 = "ab" ;
-
-novaRegra.key = 'S';
-novaRegra.rule = rule2;
-novaRegra.next = NULL;
-
-gramatica.next = *novaRegra;
-```
-
-
-
