@@ -8,10 +8,11 @@
 #include <cstring>
 #include <vector>
 #include <unordered_map>
+#include <fstream>
 #include "lrecursionpurge.h"
 #include "grammar.h"
 
-bool lrecursionpurge(GrammarRule* s) {
+bool lrecursionpurge(GrammarRule* s, std::string outputfilename) {
 
 
     std::stringbuf a ("");
@@ -68,11 +69,14 @@ bool lrecursionpurge(GrammarRule* s) {
         g = g->next;
     }
 
+    std::ofstream myfile;
+    myfile.open (outputfilename);
     g = s;
     while (g != NULL) {
-        std::cout << *g->key << "-" << *g->rule << std::endl;
+        myfile << *g->key << "-" << *g->rule << std::endl;
         g = g->next;
     }
+    myfile.close();
 
     return true;
 }
@@ -93,3 +97,4 @@ void addNewRecursion(char k, char newk, GrammarRule* s) {
     return;
 }
 
+//, std::ios_base::trunc | std::ios_base::out | std::ios_base::app

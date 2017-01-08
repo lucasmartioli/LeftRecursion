@@ -7,7 +7,6 @@
 #include <malloc.h>
 #include <iostream>
 #include "readgrammar.h"
-#include "grammar.h"
 
 GrammarRule* readgrammar(char *filename)
 {

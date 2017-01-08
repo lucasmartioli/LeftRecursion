@@ -7,7 +7,7 @@
 
 #include "readgrammar.h"
 
-bool lrecursionpurge(GrammarRule* s);
+bool lrecursionpurge(GrammarRule* s, std::string outputfilename);
 void addNewRecursion(char k, char newk, GrammarRule* s);
 
 #endif //PREDICTIONTABLE_LRECURSIONPURGE_H
