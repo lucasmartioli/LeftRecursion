@@ -8,7 +8,7 @@ Retira a recursão a esquerda, dado uma gramática.
 Na pasta onde se encontram os arquivos fontes executar comando **"cmake ."**
 Também na pasta executar o comando **"make"**
 
-Para testar executar **"./LeftRecursion <nome_do_arquivo_de_entrada> [nome_do_arquivo_de_saida]"**
+Para testar executar **"./LeftRecursion \<nome_do_arquivo_de_entrada\> [nome_do_arquivo_de_saida]"**
 
 # Detalhes de execução
 
