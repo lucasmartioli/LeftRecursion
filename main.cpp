@@ -16,7 +16,7 @@ int main(int ac, char *av[])
 
     if (ac < 2 || ac > 3)
     {
-        std::cout << "<arquivo de entrada> [arquivo de saida]" << std::endl;
+        std::cout << "Parametros de entrada: <arquivo de entrada> [arquivo de saida]='" + nomearquivodesaida + "'" << std::endl;
         return false;
     }
 
@@ -35,6 +35,8 @@ int main(int ac, char *av[])
         std::cout << "Erro ao tentar retirar recursões a esquerda da gramatica apresentada!" << std::endl;
         return false;
     }
+
+    std::cout << "Resposta do programa esta no arquivo: " + nomearquivodesaida << std::endl;
 
     return true;
 }
