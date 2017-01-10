@@ -5,10 +5,10 @@ Retira a recursão a esquerda, dado uma gramática.
 
 **Para compilar no Linux:**
 
-Na pasta **PredictionTable** executar comando **"cmake ."**
+Na pasta onde se encontram os arquivos fontes executar comando **"cmake ."**
 Também na pasta executar o comando **"make"**
 
-Para testar executar **"./PredictionTable nome_do_arquivo_de_entrada"**
+Para testar executar **"./LeftRecursion nome_do_arquivo_de_entrada"**
 
 # Detalhes de execução
 
