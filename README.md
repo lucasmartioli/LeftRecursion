@@ -8,7 +8,7 @@ Retira a recursão a esquerda, dado uma gramática.
 Na pasta onde se encontram os arquivos fontes executar comando **"cmake ."**
 Também na pasta executar o comando **"make"**
 
-Para testar executar **"./LeftRecursion nome_do_arquivo_de_entrada"**
+Para testar executar **"./LeftRecursion <nome_do_arquivo_de_entrada> [nome_do_arquivo_de_saida]"**
 
 # Detalhes de execução
 
@@ -17,6 +17,8 @@ Para as gramaticas utilizadas, **NENHUM simbolo deve ter mais de um caracter**
 Para as gramaticas utilizadas, o caracter que representa o **vazio** na gramatica, o **ε (epsolon)**, foi selecionado o caracter **e**.
 
 **GRAMATICA DE TESTE**
+
+A gramática de teste é a que aparece no arquivo gramtica.txt.
 
 ```
 A-Ab|b|C
